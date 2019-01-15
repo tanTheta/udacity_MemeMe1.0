@@ -45,10 +45,12 @@ UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegat
         self.bottom.text = "BOTTOM"
         self.top.textAlignment = NSTextAlignment.center
         self.bottom.textAlignment = NSTextAlignment.center
-
         self.share.isEnabled = false
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        if (!UIImagePickerController.isSourceTypeAvailable(.camera)){
+            camera.isEnabled = false
+        }
 
     }
     
@@ -67,7 +69,6 @@ UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegat
         else {
             imagePicker.sourceType = .camera;
             imagePicker.allowsEditing = false
-            
             self.present(imagePicker, animated: true, completion: nil)
         }
     }
