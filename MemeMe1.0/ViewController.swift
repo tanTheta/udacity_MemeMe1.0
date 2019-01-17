@@ -20,11 +20,12 @@ UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegat
     @IBOutlet weak var top: UITextField!    
     @IBOutlet weak var camera: UIButton!
     @IBOutlet weak var toolbar: UIToolbar!
-    let memeTextAttributes: [String: Any] = [
-        NSAttributedStringKey.strokeColor.rawValue: UIColor.white,
-        NSAttributedStringKey.foregroundColor.rawValue: UIColor.black,
-        NSAttributedStringKey.font.rawValue: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-        NSAttributedStringKey.strokeWidth.rawValue:  3.0
+    
+    let memeTextAttributes: [NSAttributedString.Key: Any] = [
+        NSAttributedString.Key.strokeColor: UIColor.white,
+        NSAttributedString.Key.foregroundColor: UIColor.black,
+        NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+        NSAttributedString.Key.strokeWidth:  3.0
     ]
     
     struct Meme {
@@ -46,18 +47,14 @@ UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegat
         self.top.textAlignment = NSTextAlignment.center
         self.bottom.textAlignment = NSTextAlignment.center
         self.share.isEnabled = false
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         if (!UIImagePickerController.isSourceTypeAvailable(.camera)){
             camera.isEnabled = false
         }
 
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     @IBAction func pickImage(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum)
         {
@@ -65,25 +62,31 @@ UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegat
             imagePicker.allowsEditing = false
             self.present(imagePicker, animated: true, completion: nil)
         }
-        else {
+    }
+    
+    @IBAction func clickImage(_ sender: Any) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera)
+        {
             imagePicker.sourceType = .camera;
             imagePicker.allowsEditing = false
             self.present(imagePicker, animated: true, completion: nil)
         }
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         imagePicker.dismiss(animated: true, completion: nil)
-        imageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        imageView.image = info[.originalImage] as? UIImage
         self.share.isEnabled = true
     }
+    
    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
                 dismiss(animated: true, completion: nil)
         
     }
+    
     @objc func keyboardWillShow(_ notification:Notification) {
         if bottom.isEditing{
-            if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
                 if self.view.frame.origin.y == 0 {
                     self.view.frame.origin.y -= keyboardSize.height
                 }
@@ -118,7 +121,7 @@ UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegat
         let img: UIImage = memed
         let shareItems:Array = [img]
         let activityViewController:UIActivityViewController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
-        activityViewController.completionWithItemsHandler = {(activityType: UIActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
+        activityViewController.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
             self.save(memedImage : memed)
             if !completed {
                 return
@@ -126,13 +129,21 @@ UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegat
         }
         self.present(activityViewController, animated: true, completion: nil)
     }
+
     func save(memedImage : UIImage) {
-        let meme = Meme(topText: self.top.text!, bottomText: self.bottom.text!, originalImage: self.imageView.image!, memedImage: memedImage)
+        let meme = Meme(
+                    topText: self.top.text!,
+                    bottomText: self.bottom.text!,
+                    originalImage: self.imageView.image!,
+                    memedImage: memedImage
+        )
     }
+    
     func hideNavigationBar(){
         self.navigationController?.navigationBar.isHidden = true
         self.toolbar.isHidden = true
     }
+    
     func showNavigationBar() {
         self.navigationController?.navigationBar.isHidden = false
         self.toolbar.isHidden = false
