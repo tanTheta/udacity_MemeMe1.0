@@ -107,6 +107,11 @@ UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegat
         textField.text = ""
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        print("testing")
+        return true
+    }
+    
     @IBAction func cancel(_ sender: Any) {
         imageView.image = nil
         self.top.text = "TOP"
