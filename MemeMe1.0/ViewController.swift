@@ -119,6 +119,7 @@ UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegat
         self.top.textAlignment = NSTextAlignment.center
         self.bottom.textAlignment = NSTextAlignment.center
         self.share.isEnabled = false
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     @IBAction func shareImage(_ sender: Any) {
