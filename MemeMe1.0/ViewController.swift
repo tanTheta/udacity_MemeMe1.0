@@ -42,17 +42,12 @@ UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegat
         self.bottom.delegate = self
         self.top.defaultTextAttributes = memeTextAttributes
         self.bottom.defaultTextAttributes = memeTextAttributes
-        self.top.text = "TOP"
-        self.bottom.text = "BOTTOM"
-        self.top.textAlignment = NSTextAlignment.center
-        self.bottom.textAlignment = NSTextAlignment.center
-        self.share.isEnabled = false
+        setDefault()
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         if (!UIImagePickerController.isSourceTypeAvailable(.camera)){
             camera.isEnabled = false
         }
-
     }
     
     @IBAction func pickImage(_ sender: Any) {
@@ -114,12 +109,7 @@ UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegat
     
     @IBAction func cancel(_ sender: Any) {
         imageView.image = nil
-        self.top.text = "TOP"
-        self.bottom.text = "BOTTOM"
-        self.top.textAlignment = NSTextAlignment.center
-        self.bottom.textAlignment = NSTextAlignment.center
-        self.share.isEnabled = false
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        setDefault()
     }
     
     @IBAction func shareImage(_ sender: Any) {
@@ -163,5 +153,13 @@ UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegat
         UIGraphicsEndImageContext()
         showNavigationBar()
         return memedImage
+    }
+    
+    func setDefault(){
+        self.top.text = "TOP"
+        self.bottom.text = "BOTTOM"
+        self.top.textAlignment = NSTextAlignment.center
+        self.bottom.textAlignment = NSTextAlignment.center
+        self.share.isEnabled = false
     }
 }
