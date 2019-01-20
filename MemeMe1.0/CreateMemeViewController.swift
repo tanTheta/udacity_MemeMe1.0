@@ -8,18 +8,17 @@
 
 import UIKit
 
-class ViewController:
+class CreateMemeViewController:
 UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate {
-    
-    var imagePicker = UIImagePickerController()
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var share: UIBarButtonItem!
     @IBOutlet weak var cancel: UIBarButtonItem!
     @IBOutlet weak var bottom: UITextField!
-    @IBOutlet weak var top: UITextField!    
-    @IBOutlet weak var camera: UIButton!
+    @IBOutlet weak var top: UITextField!
     @IBOutlet weak var toolbar: UIToolbar!
+    @IBOutlet weak var camera: UIBarButtonItem!
+    @IBOutlet weak var album: UIBarButtonItem!
     
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor: UIColor.white,
@@ -37,46 +36,44 @@ UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.imagePicker.delegate = self
         self.top.delegate = self
         self.bottom.delegate = self
+        self.top.text = "TOP"
+        self.bottom.text = "BOTTOM"
         self.top.defaultTextAttributes = memeTextAttributes
         self.bottom.defaultTextAttributes = memeTextAttributes
+        self.top.textAlignment = NSTextAlignment.center
+        self.bottom.textAlignment = NSTextAlignment.center
+        NotificationCenter.default.addObserver(self, selector: #selector(CreateMemeViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CreateMemeViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        camera.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+    }
+
+    @IBAction func pickImageFromAlbum(_ sender: Any) {
+        openImagePicker(UIImagePickerController.SourceType.savedPhotosAlbum)
+    }
+    
+    @IBAction func pickImageFromCamera(_ sender: Any) {
+        openImagePicker(UIImagePickerController.SourceType.camera)
+    }
+    func openImagePicker(_ type: UIImagePickerController.SourceType){
+        let picker = UIImagePickerController()
         setDefault()
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        if (!UIImagePickerController.isSourceTypeAvailable(.camera)){
-            camera.isEnabled = false
-        }
-    }
-    
-    @IBAction func pickImage(_ sender: Any) {
-        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum)
-        {
-            imagePicker.sourceType = .savedPhotosAlbum;
-            imagePicker.allowsEditing = false
-            self.present(imagePicker, animated: true, completion: nil)
-        }
-    }
-    
-    @IBAction func clickImage(_ sender: Any) {
-        if UIImagePickerController.isSourceTypeAvailable(.camera)
-        {
-            imagePicker.sourceType = .camera;
-            imagePicker.allowsEditing = false
-            self.present(imagePicker, animated: true, completion: nil)
-        }
+        picker.delegate = self
+        picker.sourceType = type
+        present(picker, animated: true, completion: nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        imagePicker.dismiss(animated: true, completion: nil)
-        imageView.image = info[.originalImage] as? UIImage
-        self.share.isEnabled = true
+        picker.dismiss(animated: true, completion: nil)
+        if let image = info[.originalImage] as? UIImage {
+            imageView.image = image
+            self.share.isEnabled = true
+        }
     }
     
-   func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-                dismiss(animated: true, completion: nil)
-        
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
     
     @objc func keyboardWillShow(_ notification:Notification) {
@@ -103,7 +100,6 @@ UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegat
     }
     
     @IBAction func cancel(_ sender: Any) {
-        imageView.image = nil
         setDefault()
     }
     
@@ -113,40 +109,34 @@ UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegat
         let shareItems:Array = [img]
         let activityViewController:UIActivityViewController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
         activityViewController.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
-            self.save(memedImage : memed)
-            if !completed {
-                return
+            if completed {
+                self.save(memedImage : memed)
             }
         }
         self.present(activityViewController, animated: true, completion: nil)
     }
-
+    
     func save(memedImage : UIImage) {
         let meme = Meme(
-                    topText: self.top.text!,
-                    bottomText: self.bottom.text!,
-                    originalImage: self.imageView.image!,
-                    memedImage: memedImage
+            topText: self.top.text!,
+            bottomText: self.bottom.text!,
+            originalImage: self.imageView.image!,
+            memedImage: memedImage
         )
     }
     
-    func hideNavigationBar(){
-        self.navigationController?.navigationBar.isHidden = true
-        self.toolbar.isHidden = true
-    }
-    
-    func showNavigationBar() {
-        self.navigationController?.navigationBar.isHidden = false
-        self.toolbar.isHidden = false
+    func hideToolBar(_ hide: Bool){
+        self.navigationController?.navigationBar.isHidden = hide
+        self.toolbar.isHidden = hide
     }
     
     func generateMemedImage() -> UIImage {
-        hideNavigationBar()
+        hideToolBar(true)
         UIGraphicsBeginImageContext(self.view.frame.size)
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
-        showNavigationBar()
+        hideToolBar(false)
         return memedImage
     }
     
@@ -156,5 +146,6 @@ UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegat
         self.top.textAlignment = NSTextAlignment.center
         self.bottom.textAlignment = NSTextAlignment.center
         self.share.isEnabled = false
+        imageView.image = nil
     }
 }
