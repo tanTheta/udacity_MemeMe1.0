@@ -19,7 +19,6 @@ UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegat
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var camera: UIBarButtonItem!
     @IBOutlet weak var album: UIBarButtonItem!
-    
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor: UIColor.white,
         NSAttributedString.Key.foregroundColor: UIColor.black,
@@ -42,20 +41,21 @@ UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegat
         self.bottom.text = "BOTTOM"
         self.top.defaultTextAttributes = memeTextAttributes
         self.bottom.defaultTextAttributes = memeTextAttributes
+        self.share.isEnabled = false
         self.top.textAlignment = NSTextAlignment.center
         self.bottom.textAlignment = NSTextAlignment.center
         NotificationCenter.default.addObserver(self, selector: #selector(CreateMemeViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(CreateMemeViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         camera.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
     }
-
-    @IBAction func pickImageFromAlbum(_ sender: Any) {
-        openImagePicker(UIImagePickerController.SourceType.savedPhotosAlbum)
-    }
     
     @IBAction func pickImageFromCamera(_ sender: Any) {
         openImagePicker(UIImagePickerController.SourceType.camera)
     }
+    @IBAction func pickImageFromAlbum(_ sender: Any) {
+        openImagePicker(UIImagePickerController.SourceType.savedPhotosAlbum)
+    }
+    
     func openImagePicker(_ type: UIImagePickerController.SourceType){
         let picker = UIImagePickerController()
         setDefault()
@@ -96,8 +96,16 @@ UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegat
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.text = ""
+        textField.placeholder = textField.text;
+        textField.text = "";
     }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if (textField.text?.count == 0) {
+            textField.text = textField.placeholder;
+        }
+        textField.placeholder = "";
+    }
+    
     
     @IBAction func cancel(_ sender: Any) {
         setDefault()
@@ -127,7 +135,7 @@ UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegat
     
     func hideToolBar(_ hide: Bool){
         self.navigationController?.navigationBar.isHidden = hide
-        self.toolbar.isHidden = hide
+        self.toolbar.isHidden = false
     }
     
     func generateMemedImage() -> UIImage {
