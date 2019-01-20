@@ -45,17 +45,17 @@
                         <constraints>
                             <constraint firstItem="q5v-Da-3O6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="48" id="04V-9V-9D2"/>
                             <constraint firstItem="RvG-pl-yIc" firstAttribute="leading" secondItem="oH7-Ju-cgU" secondAttribute="leading" id="0Zm-Ro-ZOY"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="OSE-fZ-cmP" secondAttribute="trailing" constant="16" id="KnS-gL-TKA"/>
                             <constraint firstItem="RvG-pl-yIc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="LZ5-4N-Nh9"/>
-                            <constraint firstItem="q5v-Da-3O6" firstAttribute="trailing" secondItem="OSE-fZ-cmP" secondAttribute="trailing" id="TB6-8u-j9t"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="q5v-Da-3O6" secondAttribute="trailing" constant="16" id="THb-zL-y7s"/>
                             <constraint firstItem="RvG-pl-yIc" firstAttribute="top" secondItem="OSE-fZ-cmP" secondAttribute="bottom" constant="79" id="U0L-cN-VoL"/>
                             <constraint firstItem="RvG-pl-yIc" firstAttribute="trailing" secondItem="oH7-Ju-cgU" secondAttribute="trailing" id="UW2-xv-bMl"/>
-                            <constraint firstItem="q5v-Da-3O6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="fNN-xQ-748"/>
+                            <constraint firstItem="q5v-Da-3O6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="X3X-8M-TG6"/>
                             <constraint firstItem="oH7-Ju-cgU" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="ovF-gg-Oyc"/>
-                            <constraint firstItem="q5v-Da-3O6" firstAttribute="leading" secondItem="OSE-fZ-cmP" secondAttribute="leading" id="qN9-Io-aOs"/>
                             <constraint firstItem="oH7-Ju-cgU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="rZA-mB-3P0"/>
                             <constraint firstItem="oH7-Ju-cgU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="sK2-U7-YhD"/>
+                            <constraint firstItem="OSE-fZ-cmP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="sTc-EE-FRZ"/>
                             <constraint firstItem="OSE-fZ-cmP" firstAttribute="centerX" secondItem="oH7-Ju-cgU" secondAttribute="centerX" id="wP3-Ad-q5X"/>
-                            <constraint firstItem="q5v-Da-3O6" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="xye-Oi-TTx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
