@@ -26,13 +26,6 @@ UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegat
         NSAttributedString.Key.strokeWidth:  3.0
     ]
     
-    struct Meme {
-        let topText : String?
-        let bottomText : String?
-        let originalImage: UIImage?
-        let memedImage: UIImage?
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.top.delegate = self
@@ -108,29 +101,42 @@ UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegat
     
     
     @IBAction func cancel(_ sender: Any) {
-        setDefault()
+        top.isHidden = true
+        bottom.isHidden = true
+        imageView.isHidden = true
+        top.text = "TOP"
+        bottom.text = "BOTTOM"
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func shareImage(_ sender: Any) {
         let memed = generateMemedImage()
-        let img: UIImage = memed
-        let shareItems:Array = [img]
-        let activityViewController:UIActivityViewController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
-        activityViewController.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
-            if completed {
-                self.save(memedImage : memed)
+        
+        let activityViewController = UIActivityViewController(activityItems: [memed], applicationActivities: nil)
+        activityViewController.completionWithItemsHandler = { activity, success, items, error in
+            if success {
+                self.save(memed)
+                self.dismiss(animated: true, completion: nil)
+                
             }
         }
-        self.present(activityViewController, animated: true, completion: nil)
+        
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        
+        present(activityViewController, animated: true, completion: nil)
     }
     
-    func save(memedImage : UIImage) {
-        let meme = Meme(
-            topText: self.top.text!,
-            bottomText: self.bottom.text!,
-            originalImage: self.imageView.image!,
-            memedImage: memedImage
-        )
+    func save(_ memedImage: UIImage) {
+        let meme = Meme(topText: self.top.text!,
+                        bottomText: self.bottom.text!,
+                        originalImage: self.imageView.image!,
+                        memedImage: generateMemedImage())
+        
+        // Add it to the memes array in the Application Delegate
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        appDelegate.memes.append(meme)
+        print(appDelegate.memes.count)
     }
     
     func hideToolBar(_ hide: Bool){
