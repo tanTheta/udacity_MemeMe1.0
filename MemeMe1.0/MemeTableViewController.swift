@@ -20,7 +20,6 @@ class MemeTableViewController: UITableViewController, UIViewControllerTransition
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(memes.count)
         return memes.count
     }
     
@@ -30,7 +29,6 @@ class MemeTableViewController: UITableViewController, UIViewControllerTransition
         let cell = tableView.dequeueReusableCell(withIdentifier: "MemeTableViewCell", for: indexPath) as! MemeTableViewCell
         cell.cellLabel.text = "\(meme.topText!) ... \(meme.bottomText!)"
         cell.memeImageView.image = meme.memedImage
-        
         return cell
     }
     
@@ -43,7 +41,7 @@ class MemeTableViewController: UITableViewController, UIViewControllerTransition
     }
     
     override var prefersStatusBarHidden : Bool {
-        return true
+        return false
     }
     
 }

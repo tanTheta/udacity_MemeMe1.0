@@ -25,7 +25,6 @@ class MemeCollectionViewController: UICollectionViewController {
     }
         
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(memes.count)
         return memes.count
     }
     
@@ -33,7 +32,6 @@ class MemeCollectionViewController: UICollectionViewController {
         let meme = memes[(indexPath as NSIndexPath).row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MemeCollectionViewCell", for: indexPath) as! MemeCollectionViewCell
         cell.memeImageView.image = meme.memedImage
-        cell.memeImageView.contentMode = UIView.ContentMode.scaleAspectFill
         return cell
     }
     
@@ -46,7 +44,7 @@ class MemeCollectionViewController: UICollectionViewController {
     }
     
     override var prefersStatusBarHidden : Bool {
-        return true
+        return false
     }
     
 }
