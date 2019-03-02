@@ -102,7 +102,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="gud-md-Giy">
             <objects>
-                <tabBarController storyboardIdentifier="goToTabBarController" id="fed-CY-cu9" sceneMemberID="viewController">
+                <tabBarController id="fed-CY-cu9" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="hMO-G8-wJw"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="VC8-QH-4ZB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
@@ -127,7 +127,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="MemeTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemeTableViewCell" rowHeight="131" id="GyR-0j-2wh" userLabel="MemeTableViewCell" customClass="MemeTableViewCell" customModule="MemeMe1_0" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="MemeTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="2" reuseIdentifier="MemeTableViewCell" rowHeight="131" id="GyR-0j-2wh" userLabel="MemeTableViewCell" customClass="MemeTableViewCell" customModule="MemeMe1_0" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="131"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GyR-0j-2wh" id="cSI-AO-cfZ">
@@ -135,7 +135,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a8q-n2-UsH">
-                                            <rect key="frame" x="238" y="54" width="95" height="19"/>
+                                            <rect key="frame" x="226" y="54" width="133" height="19"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="19" id="llr-58-e5X"/>
                                             </constraints>
@@ -153,11 +153,11 @@
                                         </imageView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailingMargin" secondItem="a8q-n2-UsH" secondAttribute="trailing" constant="26" id="6it-sb-jxT"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="a8q-n2-UsH" secondAttribute="trailing" id="6it-sb-jxT"/>
                                         <constraint firstItem="eq4-oy-cmZ" firstAttribute="top" secondItem="cSI-AO-cfZ" secondAttribute="top" id="7p0-za-c7w" userLabel="Meme Image View.leading = leadingMargin + 6"/>
                                         <constraint firstItem="eq4-oy-cmZ" firstAttribute="leading" secondItem="cSI-AO-cfZ" secondAttribute="leadingMargin" constant="-16" id="LEx-yq-Air" userLabel="Meme Image View.CenterY = Cell Label.CenterY"/>
                                         <constraint firstItem="eq4-oy-cmZ" firstAttribute="bottom" secondItem="cSI-AO-cfZ" secondAttribute="bottomMargin" id="bGN-MJ-3n5" userLabel="Meme Image View.top = topMargin + 5"/>
-                                        <constraint firstItem="a8q-n2-UsH" firstAttribute="leading" secondItem="eq4-oy-cmZ" secondAttribute="trailing" constant="33" id="cOd-1t-c78" userLabel="Cell Label.leading = Meme Image View.trailing + 21"/>
+                                        <constraint firstItem="a8q-n2-UsH" firstAttribute="leading" secondItem="eq4-oy-cmZ" secondAttribute="trailing" constant="21" id="cOd-1t-c78" userLabel="Cell Label.leading = Meme Image View.trailing + 21"/>
                                         <constraint firstItem="a8q-n2-UsH" firstAttribute="top" secondItem="cSI-AO-cfZ" secondAttribute="topMargin" constant="43" id="oQp-Hd-bb6"/>
                                     </constraints>
                                 </tableViewCellContentView>
