@@ -194,6 +194,11 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KNI-XC-btk">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="667" id="Fi2-7W-aSC"/>
+                                    <constraint firstAttribute="width" constant="375" id="RB7-WU-wWx"/>
+                                    <constraint firstAttribute="width" secondItem="KNI-XC-btk" secondAttribute="height" multiplier="375:667" id="RRa-GV-usp"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -239,7 +244,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="171" height="128"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oE1-zZ-UoP">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oE1-zZ-UoP">
                                             <rect key="frame" x="0.0" y="0.0" width="171" height="128"/>
                                         </imageView>
                                     </subviews>
@@ -276,7 +281,7 @@
         <scene sceneID="NrL-FV-BCJ">
             <objects>
                 <navigationController id="TTg-UR-Y0O" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Collection" id="Egj-t6-QOY" userLabel="Collection"/>
+                    <tabBarItem key="tabBarItem" title="Collection" image="collection_60x60" selectedImage="collection_60x60" id="Egj-t6-QOY" userLabel="Collection"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FXC-Uz-4dy">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -293,7 +298,7 @@
         <scene sceneID="DQS-4D-kqF">
             <objects>
                 <navigationController id="5WV-Bx-xSI" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Table" id="NxA-NF-HQv" userLabel="Table"/>
+                    <tabBarItem key="tabBarItem" title="Table" image="table_60x60" selectedImage="table_60x60" id="NxA-NF-HQv" userLabel="Table"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pwh-3j-04L">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -329,6 +334,10 @@
             <point key="canvasLocation" x="276" y="-1405"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="collection_60x60" width="60" height="61"/>
+        <image name="table_60x60" width="60" height="60"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Kc5-E9-kU0"/>
     </inferredMetricsTieBreakers>

@@ -14,9 +14,17 @@ class MemeCollectionViewController: UICollectionViewController {
         return (UIApplication.shared.delegate as! AppDelegate).memes
     }
     
+    let columnLayout = ColumnFlowLayout(
+        cellsPerRow: 3,
+        minimumInteritemSpacing: 10,
+        minimumLineSpacing: 10,
+        sectionInset: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    )
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        collectionView?.collectionViewLayout = columnLayout
+        collectionView?.contentInsetAdjustmentBehavior = .always
     }
     
     override func viewDidAppear(_ animated: Bool) {
