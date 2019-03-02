@@ -122,7 +122,7 @@
         <scene sceneID="jqq-fj-db6">
             <objects>
                 <tableViewController id="UGL-Qj-Frn" userLabel="Meme Table View Controller" customClass="MemeTableViewController" customModule="MemeMe1_0" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="GJT-iI-ues">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="GJT-iI-ues">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -131,7 +131,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="131"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GyR-0j-2wh" id="cSI-AO-cfZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="130.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="131"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a8q-n2-UsH">
@@ -194,23 +194,14 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KNI-XC-btk">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="667" id="Fi2-7W-aSC"/>
-                                    <constraint firstAttribute="width" constant="375" id="RB7-WU-wWx"/>
-                                    <constraint firstAttribute="width" secondItem="KNI-XC-btk" secondAttribute="height" multiplier="375:667" id="RRa-GV-usp"/>
-                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="KNI-XC-btk" firstAttribute="top" secondItem="zQU-DO-pXJ" secondAttribute="top" id="5nX-56-fgq"/>
-                            <constraint firstItem="KNI-XC-btk" firstAttribute="top" secondItem="zQU-DO-pXJ" secondAttribute="top" id="GQf-ao-Aqb"/>
-                            <constraint firstItem="KNI-XC-btk" firstAttribute="leading" secondItem="UbZ-RG-VpV" secondAttribute="leading" id="Pkw-0i-VTg"/>
-                            <constraint firstAttribute="trailing" secondItem="KNI-XC-btk" secondAttribute="trailing" id="aZ4-E7-x7K"/>
-                            <constraint firstItem="KNI-XC-btk" firstAttribute="bottom" secondItem="UbZ-RG-VpV" secondAttribute="bottom" id="dnT-Ht-ipn"/>
-                            <constraint firstItem="KNI-XC-btk" firstAttribute="bottom" secondItem="UbZ-RG-VpV" secondAttribute="bottom" id="n9L-Sy-MQj"/>
-                            <constraint firstItem="KNI-XC-btk" firstAttribute="leading" secondItem="zQU-DO-pXJ" secondAttribute="leading" id="ogn-IW-c9p"/>
-                            <constraint firstItem="KNI-XC-btk" firstAttribute="trailing" secondItem="UbZ-RG-VpV" secondAttribute="trailing" id="rRx-3c-eJO"/>
+                            <constraint firstItem="KNI-XC-btk" firstAttribute="bottom" secondItem="UbZ-RG-VpV" secondAttribute="bottom" id="K5o-jb-gvY"/>
+                            <constraint firstItem="KNI-XC-btk" firstAttribute="leading" secondItem="zQU-DO-pXJ" secondAttribute="leading" id="KXc-Fq-Nl9"/>
+                            <constraint firstItem="KNI-XC-btk" firstAttribute="top" secondItem="zQU-DO-pXJ" secondAttribute="top" id="llo-Th-l0J"/>
+                            <constraint firstAttribute="trailing" secondItem="KNI-XC-btk" secondAttribute="trailing" id="u6V-dl-LzQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UbZ-RG-VpV"/>
                     </view>
@@ -339,6 +330,6 @@
         <image name="table_60x60" width="60" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Kc5-E9-kU0"/>
+        <segue reference="D2b-YF-E0I"/>
     </inferredMetricsTieBreakers>
 </document>

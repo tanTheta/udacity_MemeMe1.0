@@ -11,19 +11,12 @@ import UIKit
 class MemeDetailViewController: UIViewController {
     
     var meme: Meme! = nil
-
-   
     
     @IBOutlet weak var memeImageView: UIImageView!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         memeImageView.image = meme.memedImage
-    }
-    
-    
-    override var prefersStatusBarHidden : Bool {
-        return true
     }
     
 }
